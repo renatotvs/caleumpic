@@ -1,0 +1,43 @@
+<header class="jumbotron">
+  <h1 class="text-center">
+    Caelumpic
+  </h1>
+</header>
+
+<main class="container">
+
+  <!--{{listaFotos}}-->
+
+
+  <!--<foto url="assets/images/avanade-logo.jpg" titulo="Avanade"></foto>
+    <foto url="assets/images/Caelum.png"></foto>
+    <foto url="assets/images/Alura.png"></foto>-->
+
+  <!--<div *ngFor="let foto of listaFotos">
+      <foto [url]="foto.url" [titulo]="foto.titulo"></foto>
+    </div>-->
+
+  <div class="row">
+    <!--<a href="/cadastro" class="btn btn-primary">Nova Foto</a>-->
+    <span class="input-group">
+      <a routerLink="/cadastro" class="btn btn-primary">Nova Foto</a>
+      <input #inputBusca (keyup)="true" type="search" class="form-control">
+    </span>
+
+  </div>
+  <div class="row">
+    &nbsp;
+  </div>
+  <div class="row">
+    <caelumpic-card *ngFor="let foto of listaFotos | filtroPorTitulo: inputBusca.value" [foto]="foto" class="col-md-4 mb-4">
+      <a [routerLink]="['/editar', foto._id]" class="foto" [title]="foto.titulo | uppercase">
+        <foto [url]="foto.url" [titulo]="foto.titulo"></foto>
+      </a>
+
+      <button (click)="apagar(foto)" class="btn btn-danger">Apagar</button>
+
+    </caelumpic-card>
+
+  </div>
+
+</main>

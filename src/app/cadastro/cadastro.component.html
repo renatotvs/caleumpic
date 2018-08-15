@@ -1,0 +1,60 @@
+<header class="jumbotron">
+  <h1 class="text-center">Cadastro de Fotos</h1>
+</header>
+
+<main class="container">
+
+  <div class="row" *ngIf="mensagem.texto">
+    <div class="col-12">
+      <caelumpic-mensagem [texto]="mensagem.texto" [tipo]="mensagem.tipo"></caelumpic-mensagem>
+    </div>
+
+  </div>
+
+  <div class="row">
+
+    <!-- <form [formGroup]="formCadastro" class="col-md-7 mb-4" (ngSubmit)="salvar(formCadastro)"> -->
+    <form [formGroup]="formCadastro" class="col-md-7 mb-4" (ngSubmit)="salvar()">
+
+      <!-- <h2>{{formCadastro.controls.titulo.invalid}}</h2> -->
+      <h2>{{foto.titulo}}</h2>
+
+      <div class="form-group">
+        <label for="">Título</label>
+        <input required formControlName="titulo" type="text" class="form-control">
+
+        <div *ngIf="titulo.errors && titulo.touched">
+          <caelumpic-mensagem *ngIf="titulo.errors['required']" tipo="danger" texto="Título obrigatório"></caelumpic-mensagem>
+          <caelumpic-mensagem *ngIf="titulo.errors['minlength']" tipo="danger" texto="O minímo de caracteres é 5"></caelumpic-mensagem>
+        </div>
+
+      </div>
+
+      <div class="form-group">
+        <label for="">URL</label>
+        <input required formControlName="url" type="text" class="form-control">
+        <caelumpic-mensagem *ngIf="url.invalid && url.touched" tipo="danger" texto="URL obrigatória"></caelumpic-mensagem>
+      </div>
+
+      <div class="form-group">
+        <label for="">Descricão:</label>
+        <input formControlName="descricao" type="text" class="form-control">
+      </div>
+
+      <a routerLink="" class="btn btn-secondary mr-2">Listagem</a>
+
+      <button [disabled]="formCadastro.invalid" class="btn btn-primary">Salvar</button>
+
+    </form>
+
+    <aside class="">
+      <h2>Preview</h2>
+      <caelumpic-card [foto]="foto" *ngIf="foto.url">
+        <foto [titulo]="foto.titulo" [url]="foto.url" class="foto"></foto>
+      </caelumpic-card>
+    </aside>
+
+  </div>
+
+
+</main>
